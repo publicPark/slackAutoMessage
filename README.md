@@ -12,7 +12,13 @@ vim .env
    
 ## cron   
 crontab -e   
+
+## cron test
+0 14 * * * /usr/bin/python3 /home/ubuntu/slackAutoMessage/test.py
+
+## cron setting
 0 3 * * 1-5 /usr/bin/python3 /home/ubuntu/slackAutoMessage/latetime.py   
+CRON_TZ=Asia/Seoul  
    
 ## log   
 0 3 * * 1-5 /usr/bin/python3 /home/ubuntu/slackAutoMessage/latetime.py > /home/ubuntu/slackAutoMessage/test.log 2>&1
