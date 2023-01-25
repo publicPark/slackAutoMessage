@@ -1,5 +1,6 @@
 import os
 from pies import slackkk
+from google_cal import calcalcal
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -15,6 +16,9 @@ today = date.today()
 
 #
 def 출근시간_슬랙():
+  휴일인가 = calcalcal.get_event("휴일")
+  if 휴일인가 > 0:
+    return
   channel = "test-jiyun" if MODE=='test' else "#"+TARGET_CHANNEL
   additional = "\n" + LOCATION
   slackkk.post_message(
