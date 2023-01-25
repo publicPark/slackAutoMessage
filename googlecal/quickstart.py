@@ -2,6 +2,7 @@ from __future__ import print_function
 
 import datetime
 import os.path
+import pytz
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -39,14 +40,15 @@ def main():
         service = build('calendar', 'v3', credentials=creds)
 
         # Call the Calendar API
-        now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
-        today = datetime.date.today().isoformat() + 'T00:00:00.000000Z'
-        todayEnd = datetime.date.today().isoformat() + 'T15:00:00.000000Z'
-        tomorrow = (datetime.date.today() + datetime.timedelta(days=1)).isoformat() + 'T00:00:00.000000Z'
-        print('Getting the upcoming 10 events', now, today, todayEnd)
+        today = datetime.datetime.now()
+        today = today.replace(hour=0, minute=0, second=0, microsecond=0)
+        tomorrow = today.replace(hour=23, minute=0, second=0, microsecond=0)
+        today_utc = today.astimezone(pytz.UTC).isoformat().replace('+00:00', 'Z')
+        tomorrow_utc = tomorrow.astimezone(pytz.UTC).isoformat().replace('+00:00', 'Z')
+        print('Getting the upcoming 10 events', today_utc)
         # calendarId='primary'
         events_result = service.events().list(calendarId='c_6930030a87cd6d5bed523c900b00ef8396a98ca302aa7f6b67652b65a5ba70e5@group.calendar.google.com', 
-                                              timeMin=today, timeMax=todayEnd, 
+                                              timeMin=today_utc, timeMax=tomorrow_utc, 
                                               maxResults=10, singleEvents=True,
                                               orderBy='startTime').execute()
         events = events_result.get('items', [])
