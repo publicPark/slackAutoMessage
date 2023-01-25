@@ -3,12 +3,16 @@
    
 ## install packages   
 pip install requests python-dotenv   
+pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
    
 ## test   
 python3 test.py   
    
 ## env   
 vim .env   
+   
+## credentials.json, token.json   
+cat > token.json   
    
 ## cron   
 crontab -e   
