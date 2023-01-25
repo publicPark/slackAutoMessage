@@ -11,7 +11,7 @@ python3 test.py
 ## env   
 vim .env   
    
-## credentials.json, token.json   
+## credentials.json, token.json (구글캘린더)   
 cat > token.json   
    
 ## cron   
