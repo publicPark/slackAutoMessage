@@ -34,14 +34,17 @@ def 출근시간_슬랙():
       text = res
   
   channel = "test-jiyun" if MODE=='test' else "#"+TARGET_CHANNEL
-  additional = "\n" + LOCATION
+  if MODE=='test':
+    text = text + "\n" + LOCATION
   slackkk.post_message(
     TOKEN_USER, 
     channel, 
-    "[" + NAME + "] " + str(today.month) + "월 " + str(today.day) + "일 " + text + additional
+    "[" + NAME + "] " + str(today.month) + "월 " + str(today.day) + "일 " + text
   )
 
 
 # 크론으로 돌릴거라면 그냥 실행하자
-time.sleep(random.uniform(0, 1000))
+random_second = random.uniform(0, 600)
+print("random second: ", random_second)
+time.sleep(random_second)
 출근시간_슬랙();
