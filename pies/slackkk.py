@@ -8,4 +8,4 @@ def post_message(token, channel, text):
     data={"channel": channel,"text": text}
   )
 
-  print(response, datetime.now())
+  print(response, channel, text, datetime.now())

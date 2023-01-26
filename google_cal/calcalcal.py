@@ -13,7 +13,7 @@ from googleapiclient.errors import HttpError
 # If modifying these scopes, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
-def get_event(keyword):
+def get_event():
     """Shows basic usage of the Google Calendar API.
     오늘 이벤트 가져오기
     """
@@ -21,8 +21,9 @@ def get_event(keyword):
     # The file token.json stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
     # time.
-    print(os.getcwd())
-    return 0
+
+    # print(os.getcwd()) // 테스트
+    # return 0
     
     if os.path.exists('token.json'):
         creds = Credentials.from_authorized_user_file('token.json', SCOPES)
@@ -57,21 +58,25 @@ def get_event(keyword):
 
         if not events:
             print('No upcoming events found.')
-            return 0
+            return
         
-        count = 0
+        휴일count = 0
         # Prints the start and name of the next 10 events
         for event in events:
             start = event['start'].get('dateTime', event['start'].get('date'))
             print(start, event['summary'])
-            if event['summary'] == keyword:
-                count=count+1
-        
-        return count
+            if '휴일' in event['summary']:
+                휴일count = 휴일count+1
+            if '예약' in event['summary']:
+                print('예약: ', event['description'])
+                return event['description']
+        if 휴일count > 0:
+            return 'pass'
+        return
 
     except HttpError as error:
         print('An error occurred: %s' % error)
-        return 0
+        return
 
 
 # if __name__ == '__main__':

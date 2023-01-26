@@ -22,9 +22,13 @@ crontab -e
 타임존이 이상할껄? 타임존은 알아서 설정하기.
    
    
-## cron setting - run!
+## cron setting >> run!
 0 3 * * 1-5 /usr/bin/python3 /home/ubuntu/slackAutoMessage/latetime.py   
    
 ## log   
 0 3 * * 1-5 /usr/bin/python3 /home/ubuntu/slackAutoMessage/latetime.py > /home/ubuntu/slackAutoMessage/test.log 2>&1
+
+## log 누적
+33 10 * * 1-5 /usr/bin/python3 /home/ubuntu/slackAutoMessage/latetime.py >> /home/ubuntu/slackAutoMessage/test.log 2>&1
+
    
