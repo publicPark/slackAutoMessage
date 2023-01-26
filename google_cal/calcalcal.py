@@ -22,8 +22,7 @@ def get_event():
     # created automatically when the authorization flow completes for the first
     # time.
 
-    # print(os.getcwd()) // 테스트
-    # return 0
+    # print('이 경로에 token.json 파일이 위치해야함: ', os.getcwd()) # 테스트. 
     
     if os.path.exists('token.json'):
         creds = Credentials.from_authorized_user_file('token.json', SCOPES)
@@ -61,23 +60,24 @@ def get_event():
             return
         
         휴일count = 0
+        예약msg = ""
         # Prints the start and name of the next 10 events
         for event in events:
             start = event['start'].get('dateTime', event['start'].get('date'))
             print(start, event['summary'])
             if '휴일' in event['summary']:
                 휴일count = 휴일count+1
-            if '예약' in event['summary']:
-                print('예약: ', event['description'])
-                return event['description']
+            if '예약' in event['summary'] and 예약msg == "":
+                예약msg = event['description']
         if 휴일count > 0:
-            return 'pass'
+            return '휴일'
+        if 예약msg:
+            return 예약msg
         return
 
     except HttpError as error:
         print('An error occurred: %s' % error)
         return
-
 
 # if __name__ == '__main__':
 #     result = get_event('휴일')

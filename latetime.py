@@ -1,6 +1,8 @@
 import os
 from pies import slackkk
 from google_cal import calcalcal
+import time
+import random
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -13,7 +15,6 @@ NAME = os.getenv("NAME")
 from datetime import date
 today = date.today()
 
-
 #
 def 출근시간_슬랙():
   res = None
@@ -24,8 +25,10 @@ def 출근시간_슬랙():
 
   text = "2시간 늦출"
 
+  print("calendar get event result: ", res)
+
   if res != None:
-    if res == 'pass':
+    if res == '휴일':
       return
     elif res:
       text = res
@@ -38,5 +41,7 @@ def 출근시간_슬랙():
     "[" + NAME + "] " + str(today.month) + "월 " + str(today.day) + "일 " + text + additional
   )
 
+
 # 크론으로 돌릴거라면 그냥 실행하자
+time.sleep(random.uniform(0, 1000))
 출근시간_슬랙();
