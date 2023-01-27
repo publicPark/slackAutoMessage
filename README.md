@@ -1,6 +1,13 @@
 # slackAutoMessage   
 슬랙을 매일매일 보내야하는데 귀찮아서 만들었다! 오늘이 며칠인지도 모르겠고! 귀찮아!   
    
+   
+# 기능 
+슬랙 보내기   
+매일 아침 자동으로 보내는 건 - 크론으로 돌림   
+휴가 갈 때나 예외 상황을 대비해서 구글 캘린더 연동함 - 연동 실패시 그냥 보냄      
+      
+      
 ## install packages   
 pip install requests python-dotenv   
 pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
