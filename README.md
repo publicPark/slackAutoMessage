@@ -14,9 +14,21 @@ pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-
    
 ## test   
 python3 test.py   
+
+## run   
+python3 latetime.py   
+   
    
 ## env   
 vim .env   
+   
+## env content   
+MODE=production   
+LOCATION=🦉   
+TOKEN_BOT=슬랙앱토큰   
+TOKEN_USER=슬랙앱유저토큰   
+TARGET_CHANNEL=#빼고채널명   
+NAME=님이름   
    
 ## credentials.json, token.json (for 구글캘린더)   
 cat > token.json   
